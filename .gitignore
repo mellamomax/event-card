@@ -1,5 +1,12 @@
-node_modules
-dist
+# Node modules
+node_modules/
+
+# Build output
+# Allow dist folder but exclude unnecessary files
+dist/
+!dist/trashcard.js
+
+# Home Assistant development files
 .hass_dev/*
 !.hass_dev/configuration.yaml
 !.hass_dev/lovelace.yaml
@@ -11,5 +18,7 @@ dist
 
 # Mac OS
 .DS_Store
-.vscode/settings.json
-.idea
+
+# IDE and editor settings
+.vscode/
+.idea/
