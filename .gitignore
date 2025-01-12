@@ -2,26 +2,12 @@
 node_modules/
 
 # Build output
-# Allow dist folder but exclude unnecessary files
 dist/
 !dist/eventcard.js
 
-# Home Assistant development files
-.hass_dev/*
-!.hass_dev/configuration.yaml
-!.hass_dev/lovelace.yaml
-!.hass_dev/views
-!.hass_dev/packages
-!.hass_dev/www
-.hass_dev/www/*
-!.hass_dev/www/.gitkeep
-
-# Mac OS
-.DS_Store
-
-# IDE and editor settings
-.vscode/
-.idea/
-
-# Exclude Jest configuration from being deployed
-jest.config.js
+# Exclude all other files from deployment
+* 
+!.gitignore
+!.hacs.json
+!README.md
+!dist/eventcard.js
