@@ -3,7 +3,7 @@ import { getDayFromDate } from './getDayFromDate';
 import { daysTill } from './daysTill';
 import { DateTime } from 'luxon';
 
-import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
+import type { EventCardConfig } from '../cards/event-card/event-card-config';
 import type { HomeAssistant } from './ha';
 import type { CalendarItem } from './calendarItem';
 
@@ -12,12 +12,12 @@ const format = (date: Date, dateStyleFormat: string, language: string) =>
 
 const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean, short?: boolean) => {
   if (offset === 'today' || offset === 'tomorrow') {
-    const key = `card.trash.${offset}${startTime && !excludeTime ? '_from_till' : ''}${startTime && !excludeTime && short ? '_short' : ''}`;
+    const key = `card.event.${offset}${startTime && !excludeTime ? '_from_till' : ''}${startTime && !excludeTime && short ? '_short' : ''}`;
 
     return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }
 
-  const key = `card.trash.day${startTime && !excludeTime ? '_from_till' : ''}${startTime && !excludeTime && short ? '_short' : ''}`;
+  const key = `card.event.day${startTime && !excludeTime ? '_from_till' : ''}${startTime && !excludeTime && short ? '_short' : ''}`;
 
   return customLocalize(`${key}`).replace('<DAY>', day).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '');
 };
@@ -25,8 +25,8 @@ const getTimeString = (customLocalize, offset: string, day?: string, startTime?:
 const getDateString = (
   item: CalendarItem,
   excludeTime?: boolean,
-  dayStyle?: TrashCardConfig['day_style'],
-  dayStyleFormat?: TrashCardConfig['day_style_format'],
+  dayStyle?: EventCardConfig['day_style'],
+  dayStyleFormat?: EventCardConfig['day_style_format'],
   hass?: HomeAssistant
 ): string => {
   if (!hass) {
@@ -69,11 +69,11 @@ const getDateString = (
     if (daysToStart > 0) {
       const daysLeft = daysToStart;
 
-      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+      return `${customLocalize(`card.event.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
     const daysToEnd = daysTill(new Date(), item.date.end);
 
-    return `${customLocalize(`card.trash.daysleftend${daysToEnd > 1 ? '_more' : ''}${startTime && !excludeTime ? '_till' : ''}`).replace('<DAYS>', `${daysToEnd}`).replace('<END>', endTime ?? '')}`;
+    return `${customLocalize(`card.event.daysleftend${daysToEnd > 1 ? '_more' : ''}${startTime && !excludeTime ? '_till' : ''}`).replace('<DAYS>', `${daysToEnd}`).replace('<END>', endTime ?? '')}`;
   }
 
   if (dayStyle === 'weekday') {

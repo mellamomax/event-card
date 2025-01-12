@@ -1,8 +1,8 @@
 import { LitElement, css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 
-@customElement(`${TRASH_CARD_NAME}-title`)
+@customElement(`${EVENT_CARD_NAME}-title`)
 class Debug extends LitElement {
   // eslint-disable-next-line class-methods-use-this
   public render () {

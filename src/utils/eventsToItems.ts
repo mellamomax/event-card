@@ -3,10 +3,10 @@ import { filterEventByPatterns } from './filterEventByPatterns';
 import type { CalendarEvent } from './calendarEvents';
 import type { CalendarItem } from './calendarItem';
 import type { ItemSettings } from './itemSettings';
-import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
+import type { EventCardConfig } from '../cards/event-card/event-card-config';
 
 interface Options {
-  pattern: Required<TrashCardConfig>['pattern'];
+  pattern: Required<EventCardConfig>['pattern'];
   useSummary: boolean;
 }
 

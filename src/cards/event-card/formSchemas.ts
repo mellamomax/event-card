@@ -1,7 +1,7 @@
-import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES, LAYOUTS, LAYOUT_ICONS } from './trash-card-config';
+import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES, LAYOUTS, LAYOUT_ICONS } from './event-card-config';
 
 import type { LocalizeFunc } from '../../utils/ha';
-import type { TrashCardConfig } from './trash-card-config';
+import type { EventCardConfig } from './event-card-config';
 import type { HaFormSchema } from '../../utils/form/ha-form';
 
 const getPatternOthersSchema = (localize: LocalizeFunc) => [
@@ -22,7 +22,7 @@ const getPatternOthersSchema = (localize: LocalizeFunc) => [
 
 const getPatternSchema = (customLocalize: LocalizeFunc, localize: LocalizeFunc) => [
   {
-    label: customLocalize(`editor.card.trash.pattern.fields.label`),
+    label: customLocalize(`editor.card.event.pattern.fields.label`),
     name: 'label',
     selector: {
       text: {}
@@ -30,23 +30,23 @@ const getPatternSchema = (customLocalize: LocalizeFunc, localize: LocalizeFunc) 
   },
   ...getPatternOthersSchema(localize),
   {
-    label: customLocalize(`editor.card.trash.pattern.fields.pattern`),
+    label: customLocalize(`editor.card.event.pattern.fields.pattern`),
     name: 'pattern',
     selector: {
       text: {}
     }
   },
   {
-    label: customLocalize(`editor.card.trash.pattern.fields.pattern_exact`),
-    helper: customLocalize(`editor.card.trash.pattern.fields.pattern_exact_description`),
+    label: customLocalize(`editor.card.event.pattern.fields.pattern_exact`),
+    helper: customLocalize(`editor.card.event.pattern.fields.pattern_exact_description`),
     name: 'pattern_exact',
     selector: {
       boolean: {}
     }
   },
   {
-    label: customLocalize(`editor.card.trash.pattern.fields.picture_url`),
-    helper: customLocalize(`editor.card.trash.pattern.fields.picture_url_description`),
+    label: customLocalize(`editor.card.event.pattern.fields.picture_url`),
+    helper: customLocalize(`editor.card.event.pattern.fields.picture_url_description`),
     name: 'picture',
     selector: {
       text: {}
@@ -55,7 +55,7 @@ const getPatternSchema = (customLocalize: LocalizeFunc, localize: LocalizeFunc) 
   }
 ];
 
-const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig, localize: LocalizeFunc) => {
+const getSchema = (customLocalize: LocalizeFunc, currentValues: EventCardConfig, localize: LocalizeFunc) => {
   const settings: HaFormSchema[] = [
 
     {

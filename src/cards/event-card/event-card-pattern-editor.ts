@@ -7,7 +7,7 @@ import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { fireEvent } from '../../utils/fireEvent';
 
-import type { TrashCardConfig } from './trash-card-config';
+import type { EventCardConfig } from './event-card-config';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { ItemSettings } from '../../utils/itemSettings';
 import type { HomeAssistant } from '../../utils/ha';
@@ -36,11 +36,11 @@ declare global {
   }
 }
 
-@customElement(`trash-card-pattern-editor`)
-class TrashCardPatternEditor extends LitElement {
+@customElement(`event-card-pattern-editor`)
+class EventCardPatternEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @state() protected pattern?: TrashCardConfig['pattern'];
+  @state() protected pattern?: EventCardConfig['pattern'];
 
   @state() private attached = false;
 
@@ -97,12 +97,12 @@ class TrashCardPatternEditor extends LitElement {
                 <span> ${
 
   // @ts-expect-error 2345
-  settingsConfig.label ?? customLocalize(`editor.card.trash.pattern.type.${settingsConfig.type}`)}</span>
+  settingsConfig.label ?? customLocalize(`editor.card.event.pattern.type.${settingsConfig.type}`)}</span>
               </div>
             </div>
 
             <ha-icon-button
-              .label=${customLocalize('editor.card.trash.pattern.edit')}
+              .label=${customLocalize('editor.card.event.pattern.edit')}
               class="edit-icon"
               .index=${index}
               @click=${this.editItem}
@@ -110,7 +110,7 @@ class TrashCardPatternEditor extends LitElement {
               <ha-icon icon="mdi:pencil"></ha-icon>
             </ha-icon-button>
             <ha-icon-button
-              .label=${customLocalize('editor.card.trash.pattern.delete')}
+              .label=${customLocalize('editor.card.event.pattern.delete')}
               class="delete-icon"
               .index=${index}
               .disabled=${settingsConfig.type !== 'custom'}
@@ -123,7 +123,7 @@ class TrashCardPatternEditor extends LitElement {
         <mwc-button
           @click=${this.createItem}
           class="gui-mode-button"
-        >${customLocalize('editor.card.trash.pattern.create')}</mwc-button>
+        >${customLocalize('editor.card.event.pattern.create')}</mwc-button>
     </div>`;
   }
 
@@ -213,7 +213,7 @@ class TrashCardPatternEditor extends LitElement {
 }
 
 export {
-  TrashCardPatternEditor
+  EventCardPatternEditor
 };
 
 export type {

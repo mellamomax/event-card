@@ -3,9 +3,9 @@ import Color from 'color';
 import { colors } from './defaultHaCardStyle';
 
 import type { CalendarItem } from './calendarItem';
-import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
+import type { EventCardConfig } from '../cards/event-card/event-card-config';
 
-const isColorModesArray = (modes: TrashCardConfig['color_mode'] | TrashCardConfig['color_mode'][]): modes is TrashCardConfig['color_mode'][] =>
+const isColorModesArray = (modes: EventCardConfig['color_mode'] | EventCardConfig['color_mode'][]): modes is EventCardConfig['color_mode'][] =>
   Boolean(modes && Array.isArray(modes));
 
 const calculateContrast = (currentColorString: string, darkMode: boolean, parentElement?: null | HTMLElement): 'text' | 'background' => {
@@ -26,10 +26,10 @@ const calculateContrast = (currentColorString: string, darkMode: boolean, parent
   }
 };
 
-const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig['color_mode'][], item: CalendarItem, parentElement?: null | HTMLElement, darkMode = false) => {
+const getColoredStyle = (modes: EventCardConfig['color_mode'] | EventCardConfig['color_mode'][], item: CalendarItem, parentElement?: null | HTMLElement, darkMode = false) => {
   const color = item.color ?? 'disabled';
 
-  const colorModes: TrashCardConfig['color_mode'][] = isColorModesArray(modes) ? modes : [ modes ?? 'background' ];
+  const colorModes: EventCardConfig['color_mode'][] = isColorModesArray(modes) ? modes : [ modes ?? 'background' ];
 
   const style = {};
   const rgbColor = getRgbColor(color);

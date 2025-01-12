@@ -1,14 +1,14 @@
-import { css, html, nothing } from 'lit';
+	import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { customElement } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { daysTill } from '../../../utils/daysTill';
 import { BaseItemElement } from './BaseItemElement';
 
-@customElement(`${TRASH_CARD_NAME}-icon-card`)
+@customElement(`${EVENT_CARD_NAME}-icon-card`)
 class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
   public render () {
     if (!this.hass || !this.item || !this.config) {
@@ -23,7 +23,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       '--mdc-icon-size': `${this.config.icon_size ?? 40}px`,
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
+      '--event-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
 
     const daysTillToday = Math.abs(daysTill(new Date(), item.date.start));

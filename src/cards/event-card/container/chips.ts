@@ -1,25 +1,25 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { customElement, property, state } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 import { classMap } from 'lit/directives/class-map.js';
 
 import '../items/chip';
 
 import type { BaseContainerElement } from './BaseContainerElement';
 import type { HomeAssistant } from '../../../utils/ha';
-import type { TrashCardConfig } from '../trash-card-config';
+import type { EventCardConfig } from '../event-card-config';
 import type { CalendarItem } from '../../../utils/calendarItem';
 
-@customElement(`${TRASH_CARD_NAME}-chips-container`)
+@customElement(`${EVENT_CARD_NAME}-chips-container`)
 class Chips extends LitElement implements BaseContainerElement {
   @state() private items?: CalendarItem[];
 
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @state() private config?: TrashCardConfig;
+  @state() private config?: EventCardConfig;
 
-  public setConfig (config?: TrashCardConfig) {
+  public setConfig (config?: EventCardConfig) {
     this.config = config;
   }
 
@@ -37,7 +37,7 @@ class Chips extends LitElement implements BaseContainerElement {
     }
 
     if (!this.items || this.items.length === 0) {
-      return html`<trash-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
+      return html`<event-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
     }
 
     const cssClasses = {
@@ -54,13 +54,13 @@ class Chips extends LitElement implements BaseContainerElement {
     return html`
       <div class=${classMap(cssClasses)}>
         ${this.items.map((item, idx) => html`
-          <trash-card-item-chip
+          <event-card-item-chip
             key=${`card-${idx}-${item.content.uid}`}
             .item=${item}
             .config=${this.config}
             .hass=${this.hass}
           >
-          </trash-card-item-card>
+          </event-card-item-card>
         `)}
     </div>
   `;

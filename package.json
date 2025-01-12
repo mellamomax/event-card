@@ -1,11 +1,11 @@
 {
-  "name": "trash-card",
+  "name": "event-card",
   "version": "2.4.5",
-  "description": "TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️",
+  "description": "EventCard - indicates what type of event will be picked up next based on your calendar entries 🗑️",
   "keywords": [
     "paper",
     "card",
-    "trash",
+    "event",
     "waste",
     "home-assistant",
     "hacs",
@@ -16,7 +16,7 @@
     "calendar"
   ],
   "private": true,
-  "main": "dist/trashcard.js",
+  "main": "dist/eventcard.js",
   "scripts": {
     "start": "rollup -c --watch --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs",
@@ -30,7 +30,7 @@
   "author": "Florian Triebel",
   "repository": {
     "type": "git",
-    "url": "https://github.com/idaho/hassio-trash-card"
+    "url": "https://github.com/mellamo/event-card"
   },
   "license": "ISC",
   "dependencies": {

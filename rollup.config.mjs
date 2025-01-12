@@ -58,7 +58,7 @@ const plugins = [
 
 export default [
   {
-    input: 'src/trashcard.ts',
+    input: 'src/eventcard.ts',
     output: {
       dir: 'dist',
       format: 'es',

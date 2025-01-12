@@ -1,24 +1,24 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { customElement, property, state } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 
-import '../items/card';
+import '../items/icon';
 
 import type { BaseContainerElement } from './BaseContainerElement';
-import type { TrashCardConfig } from '../trash-card-config';
+import type { EventCardConfig } from '../event-card-config';
 import type { CalendarItem } from '../../../utils/calendarItem';
 import type { HomeAssistant } from '../../../utils/ha';
 
-@customElement(`${TRASH_CARD_NAME}-cards-container`)
-class Cards extends LitElement implements BaseContainerElement {
+@customElement(`${EVENT_CARD_NAME}-icons-container`)
+class Icons extends LitElement implements BaseContainerElement {
   @state() private items?: CalendarItem[];
 
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @state() private config?: TrashCardConfig;
+  @state() private config?: EventCardConfig;
 
-  public setConfig (config?: TrashCardConfig) {
+  public setConfig (config?: EventCardConfig) {
     this.config = config;
   }
 
@@ -36,10 +36,10 @@ class Cards extends LitElement implements BaseContainerElement {
     }
 
     if (!this.items || this.items.length === 0) {
-      return html`<trash-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
+      return html`<event-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
     }
 
-    const itemsPerRow = this.config.items_per_row ?? 1;
+    const itemsPerRow = this.items.length;
 
     const cssStyleMap = styleMap({
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -47,15 +47,15 @@ class Cards extends LitElement implements BaseContainerElement {
     });
 
     return html`
-        <div style=${cssStyleMap} class="card-container">
+        <div style=${cssStyleMap} class="icons-container">
           ${this.items.map((item, idx) => html`
-              <trash-card-item-card
+              <event-card-icon-card
                 key=${`card-${idx}-${item.content.uid}`}
-                .item=${item}
+                .item=${{ ...item, nextEvent: idx === 0 }}
                 .config=${this.config}
                 .hass=${this.hass}
               >
-              </trash-card-item-card>
+              </event-card-icon-card>
             `)}
         </div>
       `;
@@ -64,12 +64,11 @@ class Cards extends LitElement implements BaseContainerElement {
   public static get styles () {
     return [
       css`
-        .card-container {
+        .icons-container {
           display: grid;
           grid-gap: var(--ha-section-grid-column-gap, 8px);
-          grid-columns: auto;
         }
-        trash-card-item-card {
+        event-card-icon-card {
           grid-row: auto / span 1;
         }
       `
@@ -78,5 +77,5 @@ class Cards extends LitElement implements BaseContainerElement {
 }
 
 export {
-  Cards
+  Icons
 };

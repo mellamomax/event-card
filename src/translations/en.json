@@ -83,7 +83,7 @@
                 "icon_size": "Icon size",
                 "with_label": "Show label"
             },
-            "trash": {
+            "event": {
                 "pattern": {
                     "title": "Edit pattern",
                     "edit": "edit",
@@ -114,12 +114,12 @@
     "card": {
         "not_found": {
             "title": "No entites defined",
-            "description": "Please select at least one calendar entity to get TrashCard to work."
+            "description": "Please select at least one calendar entity to get EventCard to work."
         },
         "empty": {
             "description": "Currently no events found. This message is only available during editing."
         },
-        "trash": {
+        "event": {
             "today": "today",
             "tomorrow": "tomorrow",
             "day": "<DAY>",

@@ -1,11 +1,11 @@
 import { html, nothing } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 import { BaseItemElement } from './BaseItemElement';
 import setupCustomlocalize from '../../../localize';
 import { hasEntities } from '../../../utils/hasEntities';
 
-@customElement(`${TRASH_CARD_NAME}-item-empty`)
+@customElement(`${EVENT_CARD_NAME}-item-empty`)
 class ItemCard extends BaseItemElement {
   public render () {
     if (!this.hass || !this.config) {
@@ -16,7 +16,7 @@ class ItemCard extends BaseItemElement {
 
     if (!hasEntities(this.config.entities)) {
       return html`
-      <ha-alert alert-type="error" .title="TrashCard">
+      <ha-alert alert-type="error" .title="EventCard">
         <b>${customLocalize('card.not_found.title')}</b>
         <div>${customLocalize('card.not_found.description')}</div>
       </ha-alert>
@@ -24,8 +24,8 @@ class ItemCard extends BaseItemElement {
     }
 
     return html`
-      <ha-alert alert-type="warning" .title="TrashCard">
-        <div><b>TrashCard</b></div>
+      <ha-alert alert-type="warning" .title="EventCard">
+        <div><b>EventCard</b></div>
         <div>${customLocalize('card.empty.description')}</div>
       </hui-warning>
     `;

@@ -6,7 +6,7 @@ import { filterDuplicatedItems } from './filterDuplicatedItems';
 import type { Debugger } from './debugger';
 import type { HomeAssistant } from './ha';
 import type { RawCalendarEvent } from './calendarEvents';
-import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
+import type { EventCardConfig } from '../cards/event-card/event-card-config';
 
 const fetchData = async (
   hass: HomeAssistant,
@@ -27,7 +27,7 @@ const getCalendarData = async (
   calendars: string[],
   { start, end, dropAfter }: { start: string; end: string; dropAfter: boolean },
   debuggerInstance: Debugger,
-  config: TrashCardConfig,
+  config: EventCardConfig,
   timezoneOffset: string
 ) => {
   const rawCalendarEvents: RawCalendarEvent[] = [];

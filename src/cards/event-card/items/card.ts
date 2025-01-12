@@ -2,14 +2,14 @@ import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
 import { customElement } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { BaseItemElement } from './BaseItemElement';
 import { daysTill } from '../../../utils/daysTill';
 import { classMap } from 'lit/directives/class-map.js';
 
-@customElement(`${TRASH_CARD_NAME}-item-card`)
+@customElement(`${EVENT_CARD_NAME}-item-card`)
 class ItemCard extends BaseItemElement {
   public render () {
     if (!this.hass || !this.item || !this.config) {

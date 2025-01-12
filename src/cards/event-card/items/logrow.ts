@@ -1,10 +1,10 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { TRASH_CARD_NAME } from '../const';
+import { EVENT_CARD_NAME } from '../const';
 
 import type { DebuggerData } from '../../../utils/debugger';
 
-@customElement(`${TRASH_CARD_NAME}-logrow`)
+@customElement(`${EVENT_CARD_NAME}-logrow`)
 class LogRow extends LitElement {
   @state() private readonly item?: DebuggerData;
 

@@ -3,14 +3,14 @@ import { getTimeZoneOffset } from './getTimeZoneOffset';
 import { filterEventByPatterns } from './filterEventByPatterns';
 
 import type { CalendarEvent } from './calendarEvents';
-import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
+import type { EventCardConfig } from '../cards/event-card/event-card-config';
 
 interface Config {
-  pattern: Required<TrashCardConfig>['pattern'];
+  pattern: Required<EventCardConfig>['pattern'];
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  filter_events: TrashCardConfig['filter_events'];
+  filter_events: EventCardConfig['filter_events'];
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  only_all_day_events: TrashCardConfig['only_all_day_events'];
+  only_all_day_events: EventCardConfig['only_all_day_events'];
 }
 
 interface Options {
@@ -26,8 +26,8 @@ const isMatchingAnyPatterns = (item: CalendarEvent, config: Config) => {
     return true;
   }
 
-  const trashTypes = config.pattern.filter(pat => pat.type !== 'others');
-  const patterns = trashTypes.filter(pattern => pattern.pattern !== undefined);
+  const eventTypes = config.pattern.filter(pat => pat.type !== 'others');
+  const patterns = eventTypes.filter(pattern => pattern.pattern !== undefined);
 
   return patterns.length === 0 || patterns.some(pat => filterEventByPatterns(pat, item));
 };

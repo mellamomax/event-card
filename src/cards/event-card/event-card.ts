@@ -3,7 +3,7 @@ import { isTodayAfter } from '../../utils/isTodayAfter';
 import { registerCustomCard } from '../../utils/registerCustomCard';
 import { html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
+import { EVENT_CARD_EDITOR_NAME, EVENT_CARD_NAME } from './const';
 import { Debugger } from '../../utils/debugger';
 import { getCalendarData } from '../../utils/getCalendarData';
 import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
@@ -14,7 +14,7 @@ import './container';
 import './items/empty';
 
 import type { PropertyValues } from 'lit';
-import type { TrashCardConfig } from './trash-card-config';
+import type { EventCardConfig } from './event-card-config';
 import type { HomeAssistant } from '../../utils/ha';
 import type { CalendarItem } from '../../utils/calendarItem';
 import type { BaseContainerElement } from './container/BaseContainerElement';
@@ -28,9 +28,9 @@ declare global {
 }
 
 registerCustomCard({
-  type: TRASH_CARD_NAME,
-  name: 'TrashCard',
-  description: 'TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️'
+  type: EVENT_CARD_NAME,
+  name: 'EventCard',
+  description: 'EventCard - indicates what type of event will be picked up next based on your calendar entries 🗑️'
 });
 
 const configDefaults = {
@@ -45,27 +45,27 @@ const configDefaults = {
   debug: false
 };
 
-@customElement(TRASH_CARD_NAME)
-export class TrashCard extends LitElement {
+@customElement(EVENT_CARD_NAME)
+export class EventCard extends LitElement {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   @state() private _hass?: HomeAssistant;
 
   public static async getConfigElement () {
-    await import('./trash-card-editor');
+    await import('./event-card-editor');
 
-    return document.createElement(TRASH_CARD_EDITOR_NAME);
+    return document.createElement(EVENT_CARD_EDITOR_NAME);
   }
 
-  public static async getStubConfig (hass: HomeAssistant): Promise<Partial<TrashCardConfig>> {
+  public static async getStubConfig (hass: HomeAssistant): Promise<Partial<EventCardConfig>> {
     const entities = Object.keys(hass.states);
 
     return {
-      type: `custom:${TRASH_CARD_NAME}`,
+      type: `custom:${EVENT_CARD_NAME}`,
       entities: [ entities[0] ]
     };
   }
 
-  @state() private config?: TrashCardConfig;
+  @state() private config?: EventCardConfig;
 
   @property() private currentItems?: CalendarItem[];
 
@@ -95,7 +95,7 @@ export class TrashCard extends LitElement {
     });
   }
 
-  public setConfig (config: TrashCardConfig): void {
+  public setConfig (config: EventCardConfig): void {
     this.config = {
       ...configDefaults,
       ...config
@@ -111,7 +111,7 @@ export class TrashCard extends LitElement {
     this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2) + 1);
   }
 
-  protected fetchCurrentTrashData () {
+  protected fetchCurrentEventData () {
     if (!this.hass || !this.config || !this.debugger || !hasEntities(this.config.entities)) {
       return;
     }
@@ -155,7 +155,7 @@ export class TrashCard extends LitElement {
     changedProps.delete('currentItems');
 
     if (!this.lastChanged || changedProps.has('config') || Date.now() - this.lastChanged.getTime() > this.getRefreshRate()) {
-      this.fetchCurrentTrashData();
+      this.fetchCurrentEventData();
     }
 
     if (changedProps.has('preview')) {
@@ -205,24 +205,24 @@ export class TrashCard extends LitElement {
     const cardStyle = this.config.card_style;
 
     if (cardStyle === 'chip') {
-      return html`<trash-card-chips-container 
+      return html`<event-card-chips-container 
         .config=${this.config} 
         .items=${this.currentItems} 
         .hass=${this.hass}
-      ></trash-card-chips-container>`;
+      ></event-card-chips-container>`;
     }
     if (cardStyle === 'icon') {
-      return html`<trash-card-icons-container 
+      return html`<event-card-icons-container 
         .config=${this.config} 
         .items=${this.currentItems} 
         .hass=${this.hass}
-      ></trash-card-icons-container>`;
+      ></event-card-icons-container>`;
     }
 
-    return html`<trash-card-cards-container 
+    return html`<event-card-cards-container 
       .config=${this.config} 
       .items=${this.currentItems} 
       .hass=${this.hass}
-    ></trash-card-cards-container>`;
+    ></event-card-cards-container>`;
   }
 }

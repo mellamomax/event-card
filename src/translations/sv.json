@@ -75,7 +75,7 @@
                 "icon_size": "Ikonstorlek",
                 "with_label": "Visa etikett"
             },
-            "trash": {
+            "event": {
                 "pattern": {
                     "title": "Redigera mönster",
                     "edit": "redigera",
@@ -103,7 +103,7 @@
     },
     "card": {
         "not_found": "Entiteten hittades inte",
-        "trash": {
+        "event": {
             "today": "idag",
             "tomorrow": "imorgon",
             "day": "<DAY>",
