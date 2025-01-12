@@ -22,3 +22,6 @@ dist/
 # IDE and editor settings
 .vscode/
 .idea/
+
+# Exclude Jest configuration from being deployed
+jest.config.js
