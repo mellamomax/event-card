@@ -1,6 +1,6 @@
 {
     "name": "EventCard",
-    "filename": "eventcard.js",
+    "filename": "dist/eventcard.js",
     "homeassistant": "2023.7.0",
     "render_readme": true
 }
