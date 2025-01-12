@@ -4,7 +4,7 @@ node_modules/
 # Build output
 # Allow dist folder but exclude unnecessary files
 dist/
-!dist/trashcard.js
+!dist/eventcard.js
 
 # Home Assistant development files
 .hass_dev/*
