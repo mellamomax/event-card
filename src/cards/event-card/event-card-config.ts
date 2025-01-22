@@ -67,6 +67,7 @@ interface EventCardConfig {
   layout: any;
   type: string;
   only_all_day_events?: boolean;
+  hide_titles?: string[]; // Add this line for hiding events by title
 }
 
  type CardStyleConfig = Pick<EventCardConfig, 'hide_time_range' | 'day_style' | 'day_style_format' | 'layout' | 'color_mode' | 'icon_size' | 'with_label'>;
@@ -97,6 +98,7 @@ const entityCardConfigStruct = assign(
     icon_size: optional(integer()),
     with_label: optional(boolean()),
     only_all_day_events: optional(boolean()),
+	hide_titles: optional(array(string())), // Add this line
     pattern: optional(array(
       object({
         color: optional(string()),

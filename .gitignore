@@ -1,13 +1,20 @@
-# Node modules
-node_modules/
-
-# Build output
+# Ignore everything in the dist folder except eventcard.js
 dist/
 !dist/eventcard.js
 
-# Exclude all other files from deployment
-* 
-!.gitignore
-!.hacs.json
-!README.md
-!dist/eventcard.js
+# Node modules
+node_modules/
+
+# Ignore other unnecessary files
+*.log
+*.tmp
+*.cache
+coverage/
+*.tsbuildinfo
+.hass_dev/
+.vscode/
+.idea/
+jest.config.js
+
+# Mac OS
+.DS_Store

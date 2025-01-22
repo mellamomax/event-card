@@ -134,7 +134,10 @@ export class EventCard extends LitElement {
       timezoneOffset
     ).
       then((data: CalendarItem[]) => {
-        this.currentItems = data;
+	  this.currentItems = data.filter(event => {
+	    const hideTitles = this.config?.hide_titles ?? [];
+	    return !hideTitles.some(hiddenTitle => event.title?.toLowerCase().includes(hiddenTitle.toLowerCase()));
+	  });
         this.lastChanged = new Date();
       }).
       // eslint-disable-next-line @typescript-eslint/no-empty-function
