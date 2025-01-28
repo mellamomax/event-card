@@ -1,3 +1,19 @@
+THIS IS A FORK, WHICH ONLY ADDS THE FUNCTIONALITY TO HIDE SPECIFIED EVENTS BY THEIR TITLE.
+Great when this card is used to show calendar events and you want to hide recurring events for a shared calendar.
+
+example code:
+
+```yaml
+type: custom:trash-card
+entities:
+  - calendar.kalendar
+hidden_titles:
+  - Lunch
+```
+
+Note it isnt case sensitive, exact match is necesary.
+
+---
 # 🗑️ TrashCard
 
 [![GitHub Release][releases-shield]][releases]
