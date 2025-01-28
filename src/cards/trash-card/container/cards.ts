@@ -39,6 +39,18 @@ class Cards extends LitElement implements BaseContainerElement {
       return html`<trash-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
     }
 
+    // Get the hidden_titles list from the configuration
+    const hiddenTitles = this.config.hidden_titles || [];
+
+    // Filter the items based on hidden_titles
+    const displayedItems = this.items.filter(
+      (item) => !hiddenTitles.includes(item.content.title) // Exclude items with matching titles
+    );
+
+    if (displayedItems.length === 0) {
+      return html`<trash-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
+    }
+
     const itemsPerRow = this.config.items_per_row ?? 1;
 
     const cssStyleMap = styleMap({
@@ -48,7 +60,7 @@ class Cards extends LitElement implements BaseContainerElement {
 
     return html`
         <div style=${cssStyleMap} class="card-container">
-          ${this.items.map((item, idx) => html`
+          ${displayedItems.map((item, idx) => html`
               <trash-card-item-card
                 key=${`card-${idx}-${item.content.uid}`}
                 .item=${item}
