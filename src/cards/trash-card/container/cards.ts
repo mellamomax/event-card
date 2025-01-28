@@ -48,7 +48,7 @@ class Cards extends LitElement implements BaseContainerElement {
 
     // Filter the items based on hidden_titles
     const displayedItems = this.items.filter(
-      (item) => !hiddenTitles.includes(item.content.title) // Exclude items with matching titles
+      (item) => !hiddenTitles.includes(item.label)
     );
 
     if (displayedItems.length === 0) {
