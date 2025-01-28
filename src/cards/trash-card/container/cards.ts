@@ -40,7 +40,7 @@ class Cards extends LitElement implements BaseContainerElement {
     }
 
     // Log all event titles
-    console.log("Event Titles:", this.items.map((item) => item.content.title));
+    console.log("Event Data:", this.items);
 
 
     // Get the hidden_titles list from the configuration
