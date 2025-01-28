@@ -202,26 +202,34 @@ export class TrashCard extends LitElement {
       return nothing;
     }
 
+	// Get the hidden_titles list from the configuration
+	const hiddenTitles = this.config.hidden_titles || [];
+
+	// Filter the events: remove items with matching titles
+	const displayedItems = this.currentItems?.filter(
+	  (event) => !hiddenTitles.includes(event.title) // Exclude events with matching titles
+	);
+
     const cardStyle = this.config.card_style;
 
     if (cardStyle === 'chip') {
       return html`<trash-card-chips-container 
         .config=${this.config} 
-        .items=${this.currentItems} 
+        .items=${displayedItems} 
         .hass=${this.hass}
       ></trash-card-chips-container>`;
     }
     if (cardStyle === 'icon') {
       return html`<trash-card-icons-container 
         .config=${this.config} 
-        .items=${this.currentItems} 
+        .items=${displayedItems} 
         .hass=${this.hass}
       ></trash-card-icons-container>`;
     }
 
     return html`<trash-card-cards-container 
       .config=${this.config} 
-      .items=${this.currentItems} 
+      .items=${displayedItems} 
       .hass=${this.hass}
     ></trash-card-cards-container>`;
   }

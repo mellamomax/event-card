@@ -67,6 +67,7 @@ interface TrashCardConfig {
   layout: any;
   type: string;
   only_all_day_events?: boolean;
+  hidden_titles?: string[];
 }
 
  type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'day_style_format' | 'layout' | 'color_mode' | 'icon_size' | 'with_label'>;
@@ -97,6 +98,7 @@ const entityCardConfigStruct = assign(
     icon_size: optional(integer()),
     with_label: optional(boolean()),
     only_all_day_events: optional(boolean()),
+	hidden_titles: optional(array(string())),
     pattern: optional(array(
       object({
         color: optional(string()),
