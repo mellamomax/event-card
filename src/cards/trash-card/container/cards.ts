@@ -39,6 +39,10 @@ class Cards extends LitElement implements BaseContainerElement {
       return html`<trash-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
     }
 
+    // Log all event titles
+    console.log("Event Titles:", this.items.map((item) => item.content.title));
+
+
     // Get the hidden_titles list from the configuration
     const hiddenTitles = this.config.hidden_titles || [];
 
