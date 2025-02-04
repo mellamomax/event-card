@@ -7,8 +7,8 @@ import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 import type { HomeAssistant } from './ha';
 import type { CalendarItem } from './calendarItem';
 
-const format = (date: Date, dateStyleFormat: string, hass.language: string) =>
-  DateTime.fromJSDate(date).setLocale(hass.language).toFormat(dateStyleFormat);
+const format = (date: Date, dateStyleFormat: string, language: string) =>
+  DateTime.fromJSDate(date).setLocale(language).toFormat(dateStyleFormat);
 
 const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean, short?: boolean) => {
   if (offset === 'today' || offset === 'tomorrow') {
@@ -27,14 +27,12 @@ const getDateString = (
   excludeTime?: boolean,
   dayStyle?: TrashCardConfig['day_style'],
   dayStyleFormat?: TrashCardConfig['day_style_format'],
-  hass?: HomeAssistant,
-  hass.languageOverride?: string
+  hass?: HomeAssistant
 ): string => {
   if (!hass) {
     return '';
   }
   
-  const hass.language = hass.languageOverride || hass.hass.language;
   const customLocalize = setupCustomlocalize(hass);
 
   const today = new Date();
