@@ -7,8 +7,8 @@ import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 import type { HomeAssistant } from './ha';
 import type { CalendarItem } from './calendarItem';
 
-const format = (date: Date, dateStyleFormat: string, language: string) =>
-  DateTime.fromJSDate(date).setLocale(language).toFormat(dateStyleFormat);
+const format = (date: Date, dateStyleFormat: string, hass.languageuage: string) =>
+  DateTime.fromJSDate(date).setLocale(hass.languageuage).toFormat(dateStyleFormat);
 
 const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean, short?: boolean) => {
   if (offset === 'today' || offset === 'tomorrow') {
@@ -28,13 +28,13 @@ const getDateString = (
   dayStyle?: TrashCardConfig['day_style'],
   dayStyleFormat?: TrashCardConfig['day_style_format'],
   hass?: HomeAssistant,
-  languageOverride?: string
+  hass.languageuageOverride?: string
 ): string => {
   if (!hass) {
     return '';
   }
   
-  const lang = languageOverride || hass.language;
+  const hass.language = hass.languageuageOverride || hass.hass.languageuage;
   const customLocalize = setupCustomlocalize(hass);
 
   const today = new Date();
@@ -48,7 +48,7 @@ const getDateString = (
   const stateDay = getDayFromDate(item.date.start);
 
   const startTime = !item.isWholeDayEvent ?
-    item.date.start.toLocaleTimeString(lang, {
+    item.date.start.toLocaleTimeString(hass.language, {
       hour: 'numeric',
       minute: 'numeric'
     }) :
@@ -74,7 +74,7 @@ const getDateString = (
   }
 
   if (dayStyle === 'weekday') {
-    return item.date.start.toLocaleDateString(lang, {
+    return item.date.start.toLocaleDateString(hass.language, {
       weekday: 'long'
     });
   }
@@ -86,11 +86,11 @@ const getDateString = (
   const showFullDate = daysToEvent >= 7;
   
   const day = dayStyle !== 'custom' ?
-    item.date.start.toLocaleDateString(lang, {
+    item.date.start.toLocaleDateString(hass.language, {
       weekday: 'short',
 	  ...(showFullDate ? { day: 'numeric', month: 'short' } : {}),
     }) :
-    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', lang);
+    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', hass.language);
 
   // Ta bort punkter från datumsträngen
   const dayClean = day.replace(/\./g, '');
