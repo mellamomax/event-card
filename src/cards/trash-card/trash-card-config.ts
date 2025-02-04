@@ -67,7 +67,6 @@ interface TrashCardConfig {
   layout: any;
   type: string;
   only_all_day_events?: boolean;
-  language?: string;
   hidden_titles?: string[];
 }
 
@@ -87,7 +86,6 @@ const entityCardConfigStruct = assign(
     hide_time_range: optional(boolean()),
     next_days: optional(integer()),
     items_per_row: optional(integer()),
-	language: optional(string()),
     refresh_rate: optional(integer()),
     drop_todayevents_from: optional(string()),
     event_grouping: optional(boolean()),
