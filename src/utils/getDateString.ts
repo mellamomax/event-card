@@ -96,7 +96,11 @@ const getDateString = (
     }) :
     format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', hass.language);
 
-  return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, false);
+
+  // Ensure time is always included, even when `showFullDate` is true
+  const dayWithTime = `${day} ${startTime ?? ''}`.trim();
+
+  return getTimeString(customLocalize, 'day', day, startTime, undefined, excludeTime, false);
 };
 
 
