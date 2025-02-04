@@ -80,7 +80,6 @@ const getDateString = (
   }
 
 
-
   // Apply 7-day rule
   const daysToEvent = daysTill(new Date(), item.date.start);
   const showFullDate = daysToEvent >= 7;
