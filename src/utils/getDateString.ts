@@ -52,15 +52,9 @@ const getDateString = (
     }) :
     undefined;
 
-  const endTime = !item.isWholeDayEvent ?
-    item.date.end.toLocaleTimeString(hass.language, {
-      hour: 'numeric',
-      minute: 'numeric'
-    }) :
-    undefined;
 
   if (stateDay === todayDay || stateDay === tomorrowDay) {
-    return getTimeString(customLocalize, stateDay === todayDay ? 'today' : 'tomorrow', undefined, startTime, endTime, excludeTime, false);
+    return getTimeString(customLocalize, stateDay === todayDay ? 'today' : 'tomorrow', undefined, startTime, undefined, excludeTime, false);
   }
 
 
@@ -100,11 +94,8 @@ const getDateString = (
   // Ensure time is always included, even when `showFullDate` is true
   const dayWithTime = `${day} ${startTime ?? ''}`.trim();
 
-  return getTimeString(customLocalize, 'day', day, startTime, undefined, excludeTime, false);
+  return getTimeString(customLocalize, 'day', dayWithTime, undefined, undefined, excludeTime, false);
 };
-
-
-
 
 
 export {
