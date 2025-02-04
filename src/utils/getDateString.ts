@@ -63,6 +63,7 @@ const getDateString = (
     return getTimeString(customLocalize, stateDay === todayDay ? 'today' : 'tomorrow', undefined, startTime, endTime, excludeTime, false);
   }
 
+
   if (dayStyle === 'counter') {
     const daysToStart = daysTill(new Date(), item.date.start);
 
@@ -82,17 +83,25 @@ const getDateString = (
     });
   }
 
+
+
+  // Apply 7-day rule
+  const daysToEvent = daysTill(new Date(), item.date.start);
+  const showFullDate = daysToEvent >= 7;
+  
   const day = dayStyle !== 'custom' ?
     item.date.start.toLocaleDateString(hass.language, {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+      weekday: 'short',
+	  ...(showFullDate ? { day: 'numeric', month: 'short' } : {}),
     }) :
     format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', hass.language);
 
   return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, false);
 };
+
+
+
+
 
 export {
   getDateString
