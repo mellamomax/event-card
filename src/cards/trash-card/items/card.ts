@@ -27,7 +27,7 @@ class ItemCard extends BaseItemElement {
       ...getColoredStyle(color_mode, item, this.parentElement, this.hass.themes.darkMode)
     };
 
-    const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
+    const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass, this.config);
 
     const daysTillToday = Math.abs(daysTill(new Date(), date.start));
 
