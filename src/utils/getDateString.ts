@@ -27,12 +27,14 @@ const getDateString = (
   excludeTime?: boolean,
   dayStyle?: TrashCardConfig['day_style'],
   dayStyleFormat?: TrashCardConfig['day_style_format'],
-  hass?: HomeAssistant
+  hass?: HomeAssistant,
+  config?: TrashCardConfig
 ): string => {
   if (!hass) {
     return '';
   }
   
+  const language = config?.language || hass.language;
   const customLocalize = setupCustomlocalize(hass);
 
   const today = new Date();
@@ -46,7 +48,7 @@ const getDateString = (
   const stateDay = getDayFromDate(item.date.start);
 
   const startTime = !item.isWholeDayEvent ?
-    item.date.start.toLocaleTimeString(hass.language, {
+    item.date.start.toLocaleTimeString(language, {
       hour: 'numeric',
       minute: 'numeric'
     }) :
@@ -72,7 +74,7 @@ const getDateString = (
   }
 
   if (dayStyle === 'weekday') {
-    return item.date.start.toLocaleDateString(hass.language, {
+    return item.date.start.toLocaleDateString(language, {
       weekday: 'long'
     });
   }
@@ -83,11 +85,11 @@ const getDateString = (
   const showFullDate = daysToEvent >= 7;
   
   const day = dayStyle !== 'custom' ?
-    item.date.start.toLocaleDateString(hass.language, {
+    item.date.start.toLocaleDateString(language, {
       weekday: 'short',
 	  ...(showFullDate ? { day: 'numeric', month: 'short' } : {}),
     }) :
-    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', hass.language);
+    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', language);
 
   // Ta bort punkter från datumsträngen
   const dayClean = day.replace(/\./g, '');
